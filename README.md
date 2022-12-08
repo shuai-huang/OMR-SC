@@ -20,7 +20,7 @@ If you use this package and find it helpful, please cite the above paper. Thanks
 ```
     ./function_src      -- This folder contains MATLAB files that are used for feature extraction
     ./omr_sc_src        -- This folder contains C++ files that are used to perform the reconstruction using the proposed OMR-SC approach
-    ./library           -- This folder contains the C++ Eigen and zbessel libraries, they are included here for your convenience
+    ./library           -- This folder contains the C++ Eigen and zbessel libraries, they are included here for your convenience. Please also install the ASPIRE and MFVDM packages in this folder.
     ./density           -- This folder contains density files saved in MATLAB MAT-file format
     ./proj_images       -- This folder contains random 2D projection images
     ./features          -- This folder contains extracted features
@@ -92,7 +92,7 @@ res_unit = 1;           % the length of a single voxel, needs to be updated for 
 reg_par = 100;          % the regularization weights for the spatial radial features and the linear projection features (the reference image), sometimes setting the regularization weight for spatial radial features to 0 might help, othertimes it might not though... the decomposition of autocorrelation features with l=0 already enforces spatial radial features
 ```
 
-* Step 3) Open `MATLAB` and extract the features.
+* Step 3) Open `MATLAB` and extract the features. Detailed comments are within each individual function file.
 ```
 addpath('./function_src')
 
@@ -199,7 +199,7 @@ proj_weight TBD             (the regularization parameter for the linear project
 num_proj  TBD               (the number of linear projection features, it varies for each reference projection)
 ```
 
-* Step 7) Take the script `run_main_noisy.sh` for example, it takes three arguments
+* Step 7) Take the script `run_main_noisy.sh` for example, it takes four arguments
 ```
 l   --- the maximum spherical harmonic degree, i.e. the previously defined l_max
 p   --- the regularization parameter for the spatial radial features and the linear projection features
@@ -215,7 +215,7 @@ init_dir="../ab_initio/noisy"
 results_dir="./results_noisy"
 ```
 
-* Step 8) Recover the ab initio density models using the features extracted from downsampled projections. If you have access to a computer cluster, you can modify the following scripts to submit the jobs to the cluster so that they can be ran in parallel.
+* Step 8) Recover the ab initio density models using the features extracted from downsampled projections. If you have access to a computer cluster, you can modify the following scripts to submit the jobs to the cluster using the `qsub` command, so that the jobs can be run in parallel.
 ```
 ./run_job_main_noisy_downsample.sh
 ./run_job_main_noiseless_downsample.sh
@@ -225,6 +225,7 @@ results_dir="./results_noisy"
 ```
 addpath('./function_src')
 
+% first read the directory and variable definitions
 run('./function_src/directory_definitions.m')
 run('./function_src/variable_definitions.m')
 
