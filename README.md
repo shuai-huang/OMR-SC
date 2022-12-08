@@ -254,7 +254,7 @@ for (idx = 1:num_ref_proj)
 end
 ```
 
-* Step 10) Exit `MATLAB`. Go the folder `omr_sc_src`, and reconstruct the final density maps. If you have access to a computer cluster, you can modify the following scripts to submit the jobs to the cluster so that they can be ran in parallel.
+* Step 10) Exit `MATLAB`. Go the folder `omr_sc_src`, and reconstruct the final density maps. If you have access to a computer cluster, you can modify the following scripts to submit the jobs to the cluster using the `qsub` command, so that the jobs can be run in parallel.
 ```
 ./run_job_main_noisy.sh
 ./run_job_main_noiseless.sh
