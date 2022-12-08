@@ -41,7 +41,8 @@ MFVDM package can be downloaed at https://github.com/frankfyf/MFVDM-cryo
 By default, please install both packages to the 'library' folder.
 ```
 
-* Step 1) Define the directories. Open `MATLAB` and type the following commands into the console. Save the directory definitions as a file `directory_definitions.m` in the folder `./function_src`
+* Step 1) Define the directories. Open the file `directory_definitions.m` in the folder `./function_src`, it contains the directory definitions. Go through each definition, and make changes accordingly.
+
 ```
 density_file = './density/den_3d_1.mat';    % a string, the location of the density file
 
@@ -67,7 +68,7 @@ init_downsample_noiseless_dir = './mom_lsq_init/noiseless_downsample';  % a stri
 
 ```
 
-* Step 2) Define the variables in `MATLAB`. Save the variable definitions as a file `variable_definitions.m` in the folder `./function_src`
+* Step 2) Define the variables. Open the file `variable_definitions.m` in the folder `./function_src`, it contains the varialbe definitions. Go through each definition, and make changes accordingly.
 ```
 LN_num = 10;            % the largest number of computing threads
 num_proj_img = 10000;   %  the number of projection images, by default 10000
@@ -88,12 +89,16 @@ l_max_downsample = 8;   % the largest spherical harmonic degree for downsampled 
 res_cutoff_thd = 0.5;   % the resolution cutoff threshold based on the FSC curve
 res_unit = 1;           % the length of a single voxel, needs to be updated for different density models
 
-reg_par = 100;          % the regularization weights for the spatial radial features and the linear projection features (the reference image), sometimes setting the regularization weight for spatial radial features to 0 might help
+reg_par = 100;          % the regularization weights for the spatial radial features and the linear projection features (the reference image), sometimes setting the regularization weight for spatial radial features to 0 might help, othertimes it might not though... the decomposition of autocorrelation features with l=0 already enforces spatial radial features
 ```
 
-* Step 3) Extract the features in `MATLAB`
+* Step 3) Open `MATLAB` and extract the features.
 ```
 addpath('./function_src')
+
+% first read the directory and variable definitions
+run('./function_src/directory_definitions.m')
+run('./function_src/variable_definitions.m')
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 % noisy reconstruction
@@ -165,7 +170,7 @@ obj_file                   --- the objection function file
 ```
 
 
-* Step 6) Set the base options files in the four folders `options_downsample_noisy`, `options_noisy`, `options_downsample_noiseless`, and `options_noiseless`. Take the base option file "options_ptn_10_base" in `options_noisy` for example, it is the option file when the largest spherical harmonic degree "l_max" is 10. Each option occupies on line, it starts with the option name, then a space, followed by a numeric value. Please adjust each option accordingly. Note that the comments within the paratheses are added here to explain each option and should not be included in the actual option file.
+* Step 6) Set the base options files (that end with the suffix "_base") in the four folders `options_downsample_noisy`, `options_noisy`, `options_downsample_noiseless`, and `options_noiseless`. Take the base option file "options_ptn_10_base" in `options_noisy` for example, it is the option file when the largest spherical harmonic degree "l_max" is 10. Each option occupies on line, it starts with the option name, then a space, followed by a numeric value. Please adjust each option accordingly. Note that the comments within the paratheses are added here to explain each option and should not be included in the actual option file.
 ```
 
 num_thread 10               (the number of computing threads)
@@ -189,8 +194,8 @@ cvg_thd 1e-6                (the convergence threshold)
 ```
 There are three more options that are set by the script `run_main_noisy.sh`
 ```
-radial_weight 100	        (the regularization parameter for the spatial radial features)
-proj_weight 100             (the regularization parameter for the linear projection features, i.e. the reference image)
+radial_weight TBD		(the regularization parameter for the spatial radial features)
+proj_weight TBD             (the regularization parameter for the linear projection features, i.e. the reference image)
 num_proj  TBD               (the number of linear projection features, it varies for each reference projection)
 ```
 
@@ -260,11 +265,9 @@ end
 
 addpath('./function_src')
 
+% first read the directory and variable definitions
 run('./function_src/directory_definitions.m')
 run('./function_src/variable_definitions.m')
-
-% make sure the density file is selected correctly
-density_file = './density/den_3d_1.mat';    % a string, the location of the density file
 
 % noisy reconstruction
 obj = zeros(num_ref_proj,1);

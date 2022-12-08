@@ -17,5 +17,4 @@ l_max_downsample = 8;   % the largest spherical harmonic degree for downsampled 
 res_cutoff_thd = 0.5;   % the resolution cutoff threshold based on the FSC curve
 res_unit = 1;           % the length of a single voxel, needs to be updated for different density models
 
-reg_par = 100;          % the regularization weights for the spatial radial features and the linear projection features (the reference image), sometimes setting the regularization weight for spatial radial features to 0 might help 
-
+reg_par = 100;          % the regularization weights for the spatial radial features and the linear projection features (the reference image), sometimes setting the regularization weight for spatial radial features to 0 might help, othertimes it might not though... the decomposition of autocorrelation features with l=0 already enforces spatial radial features

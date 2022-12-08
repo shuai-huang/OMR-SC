@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# use wavelet basis
 l=$1
 p=$2
 r=$3
@@ -16,7 +15,7 @@ results_dir="./results_noisy"
 # create the customized option file
 # modify the corresponding base option file options_ptn_"$l"_base accordingly
 cat "$option_dir"/options_ptn_"$l"_base > "$option_dir"/options_ptn_"$l"_"$p"_"$m"
-echo "radial_weight $p" >> "$option_dir"/options_ptn_"$l"_"$p"_"$m"
+#echo "radial_weight $p" >> "$option_dir"/options_ptn_"$l"_"$p"_"$m"
 echo "proj_weight $p" >> "$option_dir"/options_ptn_"$l"_"$p"_"$m"
 
 num_proj=`cat $proj_dir/proj_image_2d_out_$m | wc -l`

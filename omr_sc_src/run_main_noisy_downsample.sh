@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# use wavelet basis
 l=$1
 p=$2
 r=$3
