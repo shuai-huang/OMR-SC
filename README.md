@@ -194,7 +194,7 @@ cvg_thd 1e-6                (the convergence threshold)
 ```
 There are three more options that are set by the script `run_main_noisy.sh`
 ```
-radial_weight TBD		(the regularization parameter for the spatial radial features)
+radial_weight TBD           (the regularization parameter for the spatial radial features)
 proj_weight TBD             (the regularization parameter for the linear projection features, i.e. the reference image)
 num_proj  TBD               (the number of linear projection features, it varies for each reference projection)
 ```
